@@ -17,19 +17,6 @@ const Coordinates = ({coordinates}) => (
   </div>
 );
 
-
-// function RepresentativesPage() {
-//   const { setState: setMapMarkers } = React.useContext(MapMarkersContext);
-//   const { data, error } = useSwr('/api/testing-sites', fetcher);
-//   if (error) {
-//     console.error('Error loading data from API for /api/testing-sites: ', error);
-//   }
-
-//   useEffect(() => {
-    
-//   });
-// }
-
 class RepresentativeSearch extends Component {
   constructor(props){
       super(props); 
@@ -55,7 +42,9 @@ class RepresentativeSearch extends Component {
   findRepresentatives(e){
     e.preventDefault();
     if(this.state.address !== ""){ 
-        fetch(`https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL}&address=${this.state.address}`,{
+      
+        //fetch(`https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL}&address=${this.state.address}`,{
+        fetch(`https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyBe7_ta_1zNod6CsCJI6ssWk64kyO14HZo&address=${this.state.address}`,{
             method: "GET",
             dataType: "JSON",
             headers: {
@@ -75,7 +64,8 @@ class RepresentativeSearch extends Component {
 
   setCoordinates(){    
     if(this.state.address !== ""){             
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL}&address=${this.state.address}`,{
+        //fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL}&address=${this.state.address}`,{
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBe7_ta_1zNod6CsCJI6ssWk64kyO14HZo&address=${this.state.address}`,{
             method: "GET",
             dataType: "JSON",
             // headers: {
@@ -83,19 +73,13 @@ class RepresentativeSearch extends Component {
             // }
         })
         .then(response => response.json())
-        .then(data => { 
-          console.log("data",data);
-          this.setState({ coordinates: {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}});
-          console.log("coordinates",this.state.coordinates)
+        .then(data => {           
+          this.setState({ coordinates: {lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}});          
         });
     }
   }
 
 render() {
-  // var representatives = "";
-  // if(!this.state.reports == []){
-  //   representatives = <RepresentativesByName json_input = {this.state.reports}/>;
-  // }
 
   return (
     

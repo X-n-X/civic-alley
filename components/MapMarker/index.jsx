@@ -12,8 +12,8 @@ export const MapMarker = ({ text, site_info }) => {
   const [isInfoOpen, setIsInfoOpen] = useState(false);  
 
   const toggleInfo = useCallback((e) => {
-    setIsInfoOpen((wasOpen) => !wasOpen);
-  }, [setIsInfoOpen]);
+    setIsInfoOpen((wasOpen) => !wasOpen);    
+  }, [setIsInfoOpen,setcenter]);
 
   return (
     <div className="map-marker-container">
@@ -24,6 +24,7 @@ export const MapMarker = ({ text, site_info }) => {
       </button>
       <div
         className={`map-marker-info${isInfoOpen ? ' map-marker-info--active' : ''}`}
+        //className={`map-marker-info${isInfoOpen ? ' map-marker-info--active' : ''}`}
       >   
       {Object.keys(site_info).map(key => (
         <p>
