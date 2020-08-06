@@ -3,13 +3,22 @@
   display: grid;
   height: 100%;
   grid:
-    ". nav-tabs" 40px
+    "sidebar-header nav-tabs" 40px
     "sidebar-content map-content" 1fr
     / 1fr 2fr;
 }
 
+.map-layout-container::before {
+  display: block;
+  content: '';
+  height: 100%;
+  grid-area: sidebar-header;
+  background: var(--vertical-gradient-gray-1);
+}
+
 .map-layout__nav-tabs {
   grid-area: nav-tabs;
+  background: var(--vertical-gradient-gray-1);
 }
 
 .map-layout__sidebar {

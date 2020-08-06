@@ -20,14 +20,16 @@ export function GoogleMap() {
         defaultCenter={{lat: 40.635,lng: -73.94}}
         defaultZoom={13}
         options={getMapOptions}
+        yesIWantToUseGoogleMapApiInternals
+        // onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
        {markers.map((item) => (
           <MapMarker
             key={item.key}
-            //text={item.name}            
+            //text={item.name}
             lat={ item.coordinates.lat}
             lng={ item.coordinates.lng}
-            site_info= {item.site_info}             
+            site_info= {item.site_info}
           />
         ))}
       </GoogleMapReact>

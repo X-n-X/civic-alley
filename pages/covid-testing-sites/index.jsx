@@ -11,14 +11,14 @@ function CovidTestingSitesPage() {
   const { data, error } = useSwr('/api/testing-sites', fetcher);
   if (error) {
     console.error('Error loading data from API for /api/testing-sites: ', error);
-  }  
+  }
 
   useEffect(() => {
     const formattedData = (data || []).map((site) => ({
       key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
-      name: site.site_name,   
+      name: site.site_name,
       site_info: {
-        name: site.site_name, 
+        name: site.site_name,
         provider_url: site.provider_url,
         additional_info: site.additional_info,
         address: site.address,
@@ -32,8 +32,8 @@ function CovidTestingSitesPage() {
         sunday: site.sunday,
         screening_required: site.screening_required,
         appointment_required: site.appointment_required,
-        antibody_testing: site.antibody_testing, 
-      },                   
+        antibody_testing: site.antibody_testing,
+      },
       coordinates: {
         lat: site.coordinates.lat,
         lng: site.coordinates.lng,
@@ -52,7 +52,11 @@ function CovidTestingSitesPage() {
     <div className="sidebar-content">
       {error && 'Error loading content'}
       {!data && !error && 'Loading...'}
-      {!error && data && 'Data goes here in addition to the map'}
+      {!error && data && data.map((site) => (
+        <p key={site.site_name}>
+          {site.site_name}
+        </p>
+      ))}
     </div>
   );
 }

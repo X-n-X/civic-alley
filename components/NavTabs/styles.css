@@ -9,11 +9,15 @@
 
 .nav-tabs__link {
   display: block;
-  color: black;
+  color: var(--light-1);
   text-decoration: none;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
+  padding: 0.3333rem 0.5rem;
+}
+
+.nav-tabs__link--active {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   border: 1px solid #ccc;
   border-bottom: none;
-  padding: 0.3333rem 0.5rem;
+  background-color: var(--dark-1);
 }

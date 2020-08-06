@@ -1,8 +1,17 @@
-@import '../components/MapLayout/styles.css';
-@import '../components/MapMarker/styles.css';
-@import '../components/GoogleMap/styles.css';
-@import '../components/Header/styles.css';
-@import '../components/NavTabs/styles.css';
+:root {
+  --dark-1: #221e1f;
+  --dark-2: #000;
+  --light-1: #fff;
+  --water-blue: #374da1;
+
+  --vertical-gradient-gray-1: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.0),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.0)
+  );
+}
 
 html {
   font-size: 16px;
@@ -10,6 +19,12 @@ html {
 
 body {
   margin: 0;
+  background-color: var(--dark-1);
+  color: white;
+}
+
+a {
+  color: inherit;
 }
 
 .app-container {
@@ -28,3 +43,10 @@ body {
 .app-container__main-content {
   grid-area: main-content;
 }
+
+@import './covid-testing-sites/styles.css';
+@import '../components/MapLayout/styles.css';
+@import '../components/MapMarker/styles.css';
+@import '../components/GoogleMap/styles.css';
+@import '../components/Header/styles.css';
+@import '../components/NavTabs/styles.css';
