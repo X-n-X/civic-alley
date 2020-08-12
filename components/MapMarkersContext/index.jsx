@@ -4,6 +4,7 @@ export const MapMarkersContext = React.createContext([]);
 
 export function Provider({ children }) {
   const [markers, setState] = React.useState([]);
+  //const [onClick, setState] = React.useState("");
   //console.log('markers: ', markers);
 
   const markersState = React.useMemo(() => {
