@@ -1,7 +1,18 @@
 import React, { useEffect } from 'react';
 import useSwr from 'swr';
 
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 import { MapMarkersContext } from 'components/MapMarkersContext';
+import { ClickedItemContext } from 'components/ClickedItemContext';
+
+//add another context that allows tracking what is in the info panel. It could possibly be a specific page in the pages folder
+//url for each specific info box. so once you click on a specific info box it could take you to a page where the data is loaded. so you could copy url and send somebody a testing site
+//more specific for each route: covid-testing-sites/"identifier" – Dynamic Routing using [] around the name of the file [site].jsx directly mapped to request.params. Max to send me next.js docs
+//still make a context, but handle more from the page so it will be easier 
+//we would link to the page so you wouldn't have a click handler, but the page itself will have a specific one it's looking at request?params="identifier"
+
 import { getLayout } from 'components/MapLayout';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
@@ -27,16 +38,18 @@ const TestingSites = ({ data }) => (
         {value.friday ? `Friday: ${value.friday}` : ''}{value.friday ? <br></br> : ''}
         {value.saturday ? `Saturday: ${value.saturday}` : ''}{value.saturday ? <br></br> : ''}
         {value.additional_info ? `Additional Information: ${value.additional_info}` : ''}{value.additional_info ? <br></br> : ''}         
-        {value.provider_url ? `URL: ` : ''}{value.provider_url ? <a href = {value.provider_url}>{value.provider_url}</a> : ''}</p>
-        
-        )
+        {value.provider_url ? `URL: ` : ''}{value.provider_url ? <a href = {value.provider_url}>{value.provider_url}</a> : ''}{value.provider_url ? <br></br> : ''} 
+        <Link href="/covid-testing-sites/[site]" as={`/covid-testing-sites/${value.site_name}?name=${value.site_name}`}>
+            <a>Link to this Info</a>
+        </Link>
+      </p>)
       
     }
   </div>
 );
 
 function CovidTestingSitesPage() {
-  const { setState: setMapMarkers } = React.useContext(MapMarkersContext);    
+  const { setState: setMapMarkers } = React.useContext(MapMarkersContext);
   const { data, error } = useSwr('/api/testing-sites', fetcher);
   if (error) {
     console.error('Error loading data from API for /api/testing-sites: ', error);
@@ -81,7 +94,7 @@ function CovidTestingSitesPage() {
     <div className="sidebar-content">
       {error && 'Error loading content'}
       {!data && !error && 'Loading...'}
-      {!error && data && "data here"}
+      {/* {!error && data && "data here"} */}
       {!error && data && <TestingSites data = {data}/>}
     </div>
   );

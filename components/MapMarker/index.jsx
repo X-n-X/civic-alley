@@ -8,19 +8,19 @@ function titleCase(string){
   return (y.join(" "));
 }
 
-export const MapMarker = ({ output_key, key, name, coordinates, site_info }) => {
+export const MapMarker = ({ output_key, key, name, coordinates, site_info, function_to_run }) => {
   const [isInfoOpen, setIsInfoOpen] = useState(false);  
   const [currentInfoOpen, setInfoOpen] = useState("");  
 
-  const toggleInfo = useCallback((e) => {
-    setIsInfoOpen((wasOpen) => !wasOpen);    
-    setInfoOpen(output_key);      
-  }, [setIsInfoOpen]);
+  // const toggleInfo = useCallback((e) => {
+  //   setIsInfoOpen((wasOpen) => !wasOpen);    
+  //   setInfoOpen(output_key);      
+  // }, [setIsInfoOpen]);
 
   return (
     <div className="map-marker-container">
       
-      <button onClick={toggleInfo} className="map-marker">
+      <button onClick={function_to_run} className="map-marker">
         {/* {text} */}
         {/* <img onClick={toggleInfo} src="https://www.fultoncountyga.gov/-/media/Images/ICONS/COVID/coronavirus-testing-icon-01.ashx?h=300&w=300&la=en&hash=167F5E81A664D85DC93C64981F374240" className="map-marker" ></img> */}        
       </button>

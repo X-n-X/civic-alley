@@ -1,9 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import useSwr from 'swr';
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { MapMarker } from 'components/MapMarker';
 import { MapMarkersContext } from 'components/MapMarkersContext';
+import { ClickedItemContext } from 'components/ClickedItemContext';
 
 import config from './mapConfig';
 
@@ -17,8 +20,10 @@ export function GoogleMap() {
   const { markers } = useContext(MapMarkersContext);    
   const [newAddress, setNewAddress] = useState("");
   const [markerClick, setMarkerClick] = useState("");
+  const [currentPointClicked, addCurrentPointClicked] = useState([]);
   const [center, setCenter] = useState({lat: 40.635,lng: -73.94});
   const [zoom, setZoom] = useState(13);
+  const { clicked_item ,setState: setClickedItem } = React.useContext(ClickedItemContext);
 
   useEffect(() => {        
     if(newAddress !== ""){
@@ -27,18 +32,30 @@ export function GoogleMap() {
           dataType: "JSON",
       })
       .then(response => response.json())
-      .then(data => {           
+      .then(data => {
         setCenter({lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}); 
         setZoom(14);
+        
       });
     }
     else if(markerClick !== ""){
-      console.log("called", markerClick)      
+      console.log("called", markerClick)
       setCenter({lat:  markerClick.lat, lng: markerClick.lng}); 
+      setNewAddress(markerClick.site_info.address);
       setZoom(14);
-    }
-
-  });
+      var clicked_items = currentPointClicked;
+      clicked_items.push(markerClick);
+      addCurrentPointClicked(clicked_items);
+      console.log("set clicked item",clicked_item)
+      setClickedItem(markerClick);
+      console.log(currentPointClicked);
+      setMarkerClick("");
+    }  
+  });    
+    //   return () => {
+    //     setClickedItem("");
+    //   }
+    // }, [clicked_item, setClickedItem]);
 
   return (
     <div className="google-map-container">            
@@ -63,6 +80,7 @@ export function GoogleMap() {
             name = {item.name}
             // coordinates = {item.coordinates}      
             site_info= {item.site_info}
+            function_to_run = {()=>setMarkerClick({name: item.name, site_info: item.site_info, lat: item.coordinates.lat,lng: item.coordinates.lng})}
           />                    
         ))}
       </GoogleMapReact>      
