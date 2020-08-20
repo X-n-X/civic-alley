@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ClickedItemContext = React.createContext([]);
+export const ClickedItemContext = React.createContext("");
 
 export function Provider({ children }) {
   const [clicked_item, setClickedItem] = React.useState("");

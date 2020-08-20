@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 import { MapMarkersContext } from 'components/MapMarkersContext';
-import { ClickedItemContext } from 'components/ClickedItemContext';
+
 
 //add another context that allows tracking what is in the info panel. It could possibly be a specific page in the pages folder
 //url for each specific info box. so once you click on a specific info box it could take you to a page where the data is loaded. so you could copy url and send somebody a testing site

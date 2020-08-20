@@ -23,7 +23,7 @@ export function GoogleMap() {
   const [currentPointClicked, addCurrentPointClicked] = useState([]);
   const [center, setCenter] = useState({lat: 40.635,lng: -73.94});
   const [zoom, setZoom] = useState(13);
-  const { clicked_item ,setState: setClickedItem } = React.useContext(ClickedItemContext);
+  const { clicked_item,setState: setClickedItem } = React.useContext(ClickedItemContext);
 
   useEffect(() => {        
     if(newAddress !== ""){
@@ -35,27 +35,30 @@ export function GoogleMap() {
       .then(data => {
         setCenter({lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng}); 
         setZoom(14);
-        
       });
     }
     else if(markerClick !== ""){
       console.log("called", markerClick)
       setCenter({lat:  markerClick.lat, lng: markerClick.lng}); 
-      setNewAddress(markerClick.site_info.address);
       setZoom(14);
       var clicked_items = currentPointClicked;
       clicked_items.push(markerClick);
       addCurrentPointClicked(clicked_items);
-      console.log("set clicked item",clicked_item)
-      setClickedItem(markerClick);
+      //setClickedItem(clicked_items);
+      // console.log("set clicked item",clicked_items)
       console.log(currentPointClicked);
       setMarkerClick("");
-    }  
-  });    
-    //   return () => {
-    //     setClickedItem("");
-    //   }
-    // }, [clicked_item, setClickedItem]);
+    }
+    if(currentPointClicked.length > 0){
+      setClickedItem(currentPointClicked[currentPointClicked.length-1]);      
+    }
+
+      return () => {
+        setClickedItem("");
+      }
+    }, [clicked_item,setClickedItem]);
+
+  
 
   return (
     <div className="google-map-container">            
