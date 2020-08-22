@@ -20,6 +20,13 @@ export function NavTabs() {
           Covid Testing Sites
         </a>
       </Link>
+      <Link href="/community-orgs">
+        <a
+          className={`nav-tabs__link${pathname === '/community-orgs' ? ' nav-tabs__link--active' : ''}`}
+        >
+          Local Community Organizations
+        </a>
+      </Link>
       <Link href="/representatives">
         <a
           className={`nav-tabs__link${pathname === '/representatives' ? ' nav-tabs__link--active' : ''}`}
