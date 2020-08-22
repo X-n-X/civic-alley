@@ -1,2 +1,4 @@
-config
+**/.DS_Store
+config/keys.js
 node_modules
+.next
