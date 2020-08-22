@@ -3,9 +3,10 @@
   display: grid;
   height: 100%;
   grid:
-    "sidebar-header nav-tabs" 40px
+    "sidebar-header nav-tabs" var(--nav-tabs-height-desktop)
     "sidebar-content map-content" 1fr
     / 1fr 2fr;
+  max-height: calc(100vh - var(--title-bar-height-desktop));
 }
 
 .map-layout-container::before {
@@ -23,6 +24,7 @@
 
 .map-layout__sidebar {
   grid-area: sidebar-content;
+  overflow-y: auto;
 }
 
 .map-layout__map-content {

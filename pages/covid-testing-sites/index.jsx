@@ -39,7 +39,6 @@ function CovidTestingSitesPage() {
         lng: site.coordinates.lng,
       },
     }));
-    //console.log("formattedData",formattedData);
     setMapMarkers(formattedData);
 
     return () => {
@@ -52,11 +51,18 @@ function CovidTestingSitesPage() {
     <div className="sidebar-content">
       {error && 'Error loading content'}
       {!data && !error && 'Loading...'}
-      {!error && data && data.map((site) => (
-        <p key={site.site_name}>
-          {site.site_name}
-        </p>
-      ))}
+      {!error && data && (
+        <ul className="covid-testing-sites__list">
+          {data.map((site) => (
+            <li
+              key={`${site.site_name}+${site.coordinates.lat}+${site.coordinates.long}`}
+              className="covid-testing-sites__list-item"
+            >
+              {site.site_name}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

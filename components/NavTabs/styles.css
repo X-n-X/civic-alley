@@ -8,16 +8,25 @@
 }
 
 .nav-tabs__link {
+  box-sizing: border-box;
   display: block;
-  color: var(--light-1);
+  color: var(--white);
   text-decoration: none;
   padding: 0.3333rem 0.5rem;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border: 1px solid transparent;
+  border-bottom: none;
+}
+
+.nav-tabs__link:hover {
+  background-color: var(--grey-1);
+  border: 1px solid var(--grey-4);
+  border-bottom: none;
 }
 
 .nav-tabs__link--active {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  border: 1px solid #ccc;
-  border-bottom: none;
   background-color: var(--dark-1);
+  border: 1px solid var(--grey-5);
+  border-bottom: none;
 }

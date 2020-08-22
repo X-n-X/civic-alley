@@ -1,16 +1,29 @@
 :root {
+  /* solid colors */
   --dark-1: #221e1f;
-  --dark-2: #000;
-  --light-1: #fff;
+  --white: #fff;
+  --grey-0: #000;
+  --grey-1: #333;
+  --grey-2: #555;
+  --grey-3: #777;
+  --grey-4: #999;
+  --grey-5: #bbb;
+  --grey-6: #ddd;
   --water-blue: #374da1;
 
-  --vertical-gradient-gray-1: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.0),
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0.0)
-  );
+  /* gradients */
+  --vertical-gradient-gray-1:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0.15),
+      rgba(255, 255, 255, 0)
+    );
+
+  /* sizing */
+  --title-bar-height-desktop: 60px;
+  --nav-tabs-height-desktop: 40px;
 }
 
 html {
@@ -31,7 +44,7 @@ a {
   height: 100vh;
   display: grid;
   grid:
-    "main-header" 60px
+    "main-header" var(--title-bar-height-desktop)
     "main-content" 1fr
     / 100%;
 }
