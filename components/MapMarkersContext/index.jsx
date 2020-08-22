@@ -2,7 +2,7 @@ import React from 'react';
 
 export const MapMarkersContext = React.createContext([]);
 
-export function Provider({ children }) {
+export function MapMarkersContextProvider({ children }) {
   const [markers, setState] = React.useState([]);
   //const [onClick, setState] = React.useState("");
   //console.log('markers: ', markers);

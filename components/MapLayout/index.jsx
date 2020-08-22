@@ -1,22 +1,25 @@
-import { Provider } from 'components/MapMarkersContext';
+import { MapMarkersContextProvider } from 'components/MapMarkersContext';
+import { SelectedSiteContextProvider } from 'components/SelectedSiteContext';
 import { GoogleMap } from 'components/GoogleMap';
 import { NavTabs } from 'components/NavTabs';
 
 export function MapLayout({ children }) {
   return (
-    <Provider>
-      <div className="map-layout-container">
-        <div className="map-layout__nav-tabs">
-          <NavTabs />
+    <MapMarkersContextProvider>
+      <SelectedSiteContextProvider>
+        <div className="map-layout-container">
+          <div className="map-layout__nav-tabs">
+            <NavTabs />
+          </div>
+          <aside className="map-layout__sidebar">
+            {children}
+          </aside>
+          <div className="map-layout__map-content">
+            <GoogleMap />
+          </div>
         </div>
-        <aside className="map-layout__sidebar">
-          {children}
-        </aside>
-        <div className="map-layout__map-content">
-          <GoogleMap />
-        </div>
-      </div>
-    </Provider>
+      </SelectedSiteContextProvider>
+    </MapMarkersContextProvider>
   );
 }
 
