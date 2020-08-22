@@ -1,0 +1,1 @@
+{"ast":null,"code":"import testingSiteData from 'data/testing_sites.json';\nexport default ((req, res) => {\n  res.json(testingSiteData);\n});","map":null,"metadata":{},"sourceType":"module"}
