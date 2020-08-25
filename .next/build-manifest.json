@@ -9,11 +9,6 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -25,16 +20,13 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
+    "/community-orgs": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/covid-testing-sites": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-<<<<<<< HEAD
-=======
-    ],
-    "/index": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
->>>>>>> ben-try-search-address
     ]
   }
 }
