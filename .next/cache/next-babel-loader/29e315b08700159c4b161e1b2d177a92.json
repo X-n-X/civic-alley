@@ -1,1 +1,0 @@
-{"ast":null,"code":"import voting_sites from 'data/voting_sites.json';\nexport default ((req, res) => {\n  res.json(voting_sites);\n});","map":null,"metadata":{},"sourceType":"module"}
