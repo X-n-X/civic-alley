@@ -96,7 +96,7 @@ const TestingSitePage = () => {
             {site_info.saturday ? `Saturday: ${site_info.saturday}` : ''}{site_info.saturday ? <br></br> : ''}
             {site_info.additional_info ? `Additional Information: ${site_info.additional_info}` : ''}{site_info.additional_info ? <br></br> : ''}
             {site_info.provider_url ? `URL: ` : ''}{site_info.provider_url ? <a href = {site_info.provider_url}>{site_info.provider_url}</a> : ''}{testingSite.provider_url ? <br></br> : ''}
-            <Link href="/covid-testing-sites/[site]" as={`/covid-testing-sites`}>
+            <br></br><Link href="/covid-testing-sites/[site]" as={`/covid-testing-sites`}>
                 <a>Link to this Info</a>
             </Link>
           </p>
@@ -108,4 +108,4 @@ const TestingSitePage = () => {
 
 TestingSitePage.getLayout = getLayout;
 
-export default TestingSitePage
+export default TestingSitePage;

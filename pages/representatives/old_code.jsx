@@ -50,7 +50,7 @@ class SimpleMap extends Component {
   findRepresentatives(e){
     e.preventDefault();
     if(this.state.address !== ""){ 
-        fetch(`https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyAJOTmiaxGzBHyK-MI9o3jRSwnHq0u-MvU&address=${this.state.address}`,{
+        fetch(`https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL}&address=${this.state.address}`,{
             method: "GET",
             dataType: "JSON",
             headers: {

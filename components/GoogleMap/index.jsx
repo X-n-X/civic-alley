@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import { MapMarker } from 'components/MapMarker';
 import { MapMarkersContext } from 'components/MapMarkersContext';
-import { ClickedItemContext } from 'components/ClickedItemContext';
+//import { ClickedItemContext } from 'components/ClickedItemContext';
 
 import config from './mapConfig';
 
@@ -23,7 +23,7 @@ export function GoogleMap() {
   const [currentPointClicked, addCurrentPointClicked] = useState([]);
   const [center, setCenter] = useState({lat: 40.635,lng: -73.94});
   const [zoom, setZoom] = useState(13);
-  const { clicked_item,setState: setClickedItem } = React.useContext(ClickedItemContext);
+  //const { clicked_item, setState: setClickedItem } = React.useContext(ClickedItemContext);
 
   useEffect(() => {
     if(newAddress !== ""){
@@ -39,8 +39,9 @@ export function GoogleMap() {
     }
     else if(markerClick !== ""){
       console.log("called", markerClick)
-      setCenter({lat:  markerClick.lat, lng: markerClick.lng}); 
+      setCenter({lat:  markerClick.lat, lng: markerClick.lng});
       setZoom(14);
+      console.log("Center and Zoom")
       var clicked_items = currentPointClicked;
       clicked_items.push(markerClick);
       addCurrentPointClicked(clicked_items);
@@ -49,14 +50,19 @@ export function GoogleMap() {
       console.log(currentPointClicked);
       setMarkerClick("");
     }
-    if(currentPointClicked.length > 0){
-      setClickedItem(currentPointClicked[currentPointClicked.length-1]);
-    }
 
-      return () => {
-        setClickedItem("");
-      }
-    }, [clicked_item,setClickedItem]);
+  /*commented out so that the click and zoom works now for any point.
+  however, we need to make sure that when an item is clicked, it passes context so that the data is shown on the side, and the icon is hovered
+  */
+  //   if(currentPointClicked.length > 0){
+  //     setClickedItem(currentPointClicked[currentPointClicked.length-1]);
+  //   }
+
+  //   return () => {
+  //     setClickedItem("");
+  //   }
+  // }, [clicked_item,setClickedItem, markerClick]);
+  });
 
 
 
