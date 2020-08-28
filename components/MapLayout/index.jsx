@@ -1,11 +1,11 @@
-import { MapMarkersContextProvider } from 'components/MapMarkersContext';
+import { MapStateContextProvider } from 'components/MapContext';
 import { SelectedSiteContextProvider } from 'components/SelectedSiteContext';
 import { GoogleMap } from 'components/GoogleMap';
 import { NavTabs } from 'components/NavTabs';
 
 export function MapLayout({ children }) {
   return (
-    <MapMarkersContextProvider>
+    <MapStateContextProvider>
       <SelectedSiteContextProvider>
         <div className="map-layout-container">
           <div className="map-layout__nav-tabs">
@@ -19,7 +19,7 @@ export function MapLayout({ children }) {
           </div>
         </div>
       </SelectedSiteContextProvider>
-    </MapMarkersContextProvider>
+    </MapStateContextProvider>
   );
 }
 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 import { MapMarker } from 'components/MapMarker';
-import { MapMarkersContext } from 'components/MapMarkersContext';
+import { MapContext } from 'components/MapContext';
 //import { ClickedItemContext } from 'components/ClickedItemContext';
 
 import config from './mapConfig';
@@ -17,29 +17,28 @@ function getMapOptions() {
 }
 
 export function GoogleMap() {
-  const { markers } = useContext(MapMarkersContext);
+  const { mapState } = useContext(MapContext);
+  console.log('mapstate?', mapState);
   const [newAddress, setNewAddress] = useState("");
   const [markerClick, setMarkerClick] = useState("");
   const [currentPointClicked, addCurrentPointClicked] = useState([]);
   const [center, setCenter] = useState({lat: 40.635,lng: -73.94});
   const [zoom, setZoom] = useState(13);
-  //const { clicked_item, setState: setClickedItem } = React.useContext(ClickedItemContext);
 
   useEffect(() => {
     if(newAddress !== ""){
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAJOTmiaxGzBHyK-MI9o3jRSwnHq0u-MvU&address=${newAddress}`,{
-          method: "GET",
-          dataType: "JSON",
-      })
-      .then(response => response.json())
-      .then(data => {
-        setCenter({lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng});
-        setZoom(14);
-      });
-    }
-    else if(markerClick !== ""){
+      fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAJOTmiaxGzBHyK-MI9o3jRSwnHq0u-MvU&address=${newAddress}`,{
+            method: "GET",
+            dataType: "JSON",
+        })
+        .then(response => response.json())
+        .then(data => {
+          setCenter({lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng});
+          setZoom(14);
+        });
+    } else if (markerClick !== "") {
       console.log("called", markerClick)
-      setCenter({lat:  markerClick.lat, lng: markerClick.lng});
+      setCenter({lat: markerClick.lat, lng: markerClick.lng});
       setZoom(14);
       console.log("Center and Zoom")
       var clicked_items = currentPointClicked;
@@ -78,7 +77,7 @@ export function GoogleMap() {
         zoom={zoom}
         options={getMapOptions}
       >
-       {markers.map((item) => (
+       {mapState.markers.map((item) => (
         //  <div onClick = {()=>setMarkerClick({lat: item.coordinates.lat,lng: item.coordinates.lng})}>
           <MapMarker
             key={item.key}

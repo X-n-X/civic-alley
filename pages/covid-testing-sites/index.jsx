@@ -4,7 +4,7 @@ import useSwr from 'swr';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { MapMarkersContext } from 'components/MapMarkersContext';
+import { MapContext, MAP_ACTIONS } from 'components/MapContext';
 
 
 //add another context that allows tracking what is in the info panel. It could possibly be a specific page in the pages folder
@@ -50,7 +50,7 @@ const TestingSites = ({ data }) => (
 );
 
 function CovidTestingSitesPage() {
-  const { setState: setMapMarkers } = React.useContext(MapMarkersContext);
+  const { dispatch: dispatchMapState } = React.useContext(MapContext);
   const { data, error } = useSwr('/api/testing-sites', fetcher);
   if (error) {
     console.error('Error loading data from API for /api/testing-sites: ', error);
@@ -83,12 +83,12 @@ function CovidTestingSitesPage() {
         lng: site.coordinates.lng,
       },
     }));
-    setMapMarkers(formattedData);
+    dispatchMapState({ action: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
 
     return () => {
-      setMapMarkers([]);
+      dispatchMapState({ action: MAP_ACTIONS.CLEAR_MARKERS });
     }
-  }, [data, setMapMarkers]);
+  }, [data, dispatchMapState]);
 
   return (
     <div className="sidebar-content">
