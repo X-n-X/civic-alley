@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import { MapMarker } from 'components/MapMarker';
 import { MapMarkersContext } from 'components/MapMarkersContext';
-//import { ClickedItemContext } from 'components/ClickedItemContext';
+import { SelectedSiteContext } from 'components/SelectedSiteContext';
 
 import config from './mapConfig';
 
@@ -23,6 +23,7 @@ export function GoogleMap() {
   const [currentPointClicked, addCurrentPointClicked] = useState([]);
   const [center, setCenter] = useState({lat: 40.635,lng: -73.94});
   const [zoom, setZoom] = useState(13);
+  
   //const { clicked_item, setState: setClickedItem } = React.useContext(ClickedItemContext);
 
   useEffect(() => {        
@@ -63,6 +64,13 @@ export function GoogleMap() {
   //   }
   // }, [clicked_item,setClickedItem, markerClick]);
   });
+
+  const coordinates = useMemo(() => getLatLongFromPath(testingSite), [testingSite]);
+
+  const { setSelectedSite } = React.useContext(SelectedSiteContext);
+  useEffect(() => {
+    setSelectedSite(coordinates)
+  }, [coordinates, setSelectedSite]);
 
   
 
