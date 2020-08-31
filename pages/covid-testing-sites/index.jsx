@@ -40,7 +40,7 @@ const TestingSites = ({ data }) => (
             {site.saturday ? `Saturday: ${site.saturday}` : ''}{site.saturday ? <br></br> : ''}
             {site.additional_info ? `Additional Information: ${site.additional_info}` : ''}{site.additional_info ? <br></br> : ''}
             {site.provider_url ? `URL: ` : ''}{site.provider_url ? <a href = {site.provider_url}>{site.provider_url}</a> : ''}{site.provider_url ? <br></br> : ''}
-            <Link href="/covid-testing-sites/[site]" as={`/covid-testing-sites/${site.coordinates.lat},${site.coordinates.lng}`}>
+            <Link href="/covid-testing-sites/[testingSite]" as={`/covid-testing-sites/${site.coordinates.lat},${site.coordinates.lng}`}>
                 <a>Link to this Info</a>
             </Link>
           </p>

@@ -12,7 +12,7 @@ export const MAP_ACTIONS = {
 const initialMapState = {
   markers: [],
   activeMarker: null,
-  mapCenter: null,
+  center: null,
 };
 
 function mapStateReducer(state, action) {
@@ -32,13 +32,18 @@ function mapStateReducer(state, action) {
     case MAP_ACTIONS.SET_CENTER: {
       return {
         ...state,
-        mapCenter: action.payload,
+        center: action.payload
+          ? {
+            lat: action.payload.lat,
+            lng: action.payload.lng,
+          }
+          : null,
       };
     }
     case MAP_ACTIONS.CLEAR_CENTER: {
       return {
         ...state,
-        mapCenter: null,
+        center: null,
       };
     }
     default: {

@@ -12,6 +12,8 @@ import config from './mapConfig';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
+const DEFAULT_CENTER = { lat: 40.635, lng: -73.94 };
+
 function getMapOptions() {
   return config;
 }
@@ -61,7 +63,9 @@ export function GoogleMap() {
   //     setClickedItem("");
   //   }
   // }, [clicked_item,setClickedItem, markerClick]);
-  });
+  }, [newAddress, markerClick]);
+
+  console.log('center? ', mapState.center)
 
 
 
@@ -72,7 +76,8 @@ export function GoogleMap() {
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyAJOTmiaxGzBHyK-MI9o3jRSwnHq0u-MvU" }}
         //bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL }}
-        center={center}
+        defaultCenter={DEFAULT_CENTER}
+        center={mapState.center || undefined}
         // defaultZoom={13}
         zoom={zoom}
         options={getMapOptions}
@@ -84,11 +89,11 @@ export function GoogleMap() {
             //text={item.name}
             lat={ item.coordinates.lat}
             lng={ item.coordinates.lng}
-            output_key = {item.output_key}
-            name = {item.name}
-            // coordinates = {item.coordinates}
-            site_info= {item.site_info}
-            function_to_run = {()=>setMarkerClick({name: item.name, site_info: item.site_info, lat: item.coordinates.lat,lng: item.coordinates.lng})}
+            output_key={item.output_key}
+            name={item.name}
+            // coordinates={item.coordinates}
+            site_info={item.site_info}
+            function_to_run={()=>setMarkerClick({name: item.name, site_info: item.site_info, lat: item.coordinates.lat,lng: item.coordinates.lng})}
           />
         ))}
       </GoogleMapReact>

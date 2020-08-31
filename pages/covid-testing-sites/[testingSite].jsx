@@ -3,14 +3,14 @@ import { useRouter } from 'next/router'
 
 import { getLayout } from 'components/MapLayout';
 import { MapMarkersContext } from 'components/MapMarkersContext';
-import { SelectedSiteContext } from 'components/SelectedSiteContext';
+import { MapContext, MAP_ACTIONS } from 'components/MapContext';
 
 import useSwr from 'swr';
 import Link from 'next/link'
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
-const latLongRegex = /^([\-\d\.]+),([\-\d\.]+)$/
+const latLongRegex = /^([-\d.]+),([-\d.]+)$/
 const getLatLongFromPath = (path) => {
   const match = latLongRegex.exec(path) || []
   return {
@@ -25,10 +25,10 @@ const TestingSitePage = () => {
 
   const coordinates = useMemo(() => getLatLongFromPath(testingSite), [testingSite]);
 
-  const { setSelectedSite } = React.useContext(SelectedSiteContext);
+  const { dispatch } = React.useContext(MapContext);
   useEffect(() => {
-    setSelectedSite(coordinates)
-  }, [coordinates, setSelectedSite]);
+    dispatch({ action: MAP_ACTIONS.SET_CENTER, payload: coordinates });
+  }, [coordinates]);
 
   const [formattedFilteredData, setFormattedFilteredData] = useState([]);
 
@@ -70,7 +70,7 @@ const TestingSitePage = () => {
     const filteredData = formattedData.filter((site) => (
       site.coordinates.lat === coordinates.lat && site.coordinates.lng === coordinates.lng
     ))
-    setMapMarkers(formattedData)
+    dispatch({ action: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
     setFormattedFilteredData(filteredData)
   }, [data, setMapMarkers, setFormattedFilteredData]);
 
