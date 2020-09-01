@@ -12,11 +12,13 @@
   display: block;
   color: var(--white);
   text-decoration: none;
-  padding: 0.3333rem 0.5rem;
+  padding: 0.3333rem 0.5rem 0.75rem 0.5rem;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   border: 1px solid transparent;
   border-bottom: none;
+  font-size: 0.8rem;
+  line-height: 1.1;
 }
 
 .nav-tabs__link:hover {

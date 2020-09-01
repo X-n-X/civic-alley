@@ -25,9 +25,13 @@ const TestingSitePage = () => {
 
   const coordinates = useMemo(() => getLatLongFromPath(testingSite), [testingSite]);
 
-  const { dispatch } = React.useContext(MapContext);
+  const { mapState, dispatch } = React.useContext(MapContext);
   useEffect(() => {
-    dispatch({ action: MAP_ACTIONS.SET_CENTER, payload: coordinates });
+    console.log('setting center: ', coordinates)
+    dispatch({
+      type: MAP_ACTIONS.SET_ACTIVE_MARKER,
+      payload: coordinates,
+    });
   }, [coordinates]);
 
   const [formattedFilteredData, setFormattedFilteredData] = useState([]);
@@ -67,12 +71,19 @@ const TestingSitePage = () => {
       },
     }));
 
-    const filteredData = formattedData.filter((site) => (
+    dispatch({ type: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
+  }, [data, setMapMarkers, setFormattedFilteredData, coordinates]);
+
+  useEffect(() => {
+    const filteredData = Array.isArray(mapState.markers) && mapState.markers.filter((site) => (
       site.coordinates.lat === coordinates.lat && site.coordinates.lng === coordinates.lng
     ))
-    dispatch({ action: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
-    setFormattedFilteredData(filteredData)
-  }, [data, setMapMarkers, setFormattedFilteredData]);
+    setFormattedFilteredData(filteredData);
+  }, [mapState.markers, coordinates])
+
+  useEffect(() => () => {
+    dispatch({ type: MAP_ACTIONS.CLEAR_ACTIVE_MARKER });
+  }, [])
 
   console.log('ffData: ', formattedFilteredData)
 

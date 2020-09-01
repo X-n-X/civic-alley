@@ -83,10 +83,10 @@ function CovidTestingSitesPage() {
         lng: site.coordinates.lng,
       },
     }));
-    dispatchMapState({ action: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
+    dispatchMapState({ type: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
 
     return () => {
-      dispatchMapState({ action: MAP_ACTIONS.CLEAR_MARKERS });
+      dispatchMapState({ type: MAP_ACTIONS.CLEAR_MARKERS });
     }
   }, [data, dispatchMapState]);
 

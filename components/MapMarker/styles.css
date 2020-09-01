@@ -2,18 +2,6 @@
   position: absolute;
 }
 
-.map-marker {
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: bold;
-  outline: none;
-  margin: 0;
-
-  /* height: 30px;
-  width: 30px; */
-}
-
-.map-marker,
 .map-marker-info {
   border-radius: 3px;
   background-color: white;
@@ -23,10 +11,6 @@
     0 0 2px 0 rgba(0, 0, 0, 0.25),
     1px 4px 5px 0 rgba(0, 0, 0, 0.2);
   color: var(--dark-1);
-}
-
-.map-marker-info {
-  display: none;
   position: absolute;
   top: 0;
   left: calc(100% + 0.5rem);
@@ -36,4 +20,19 @@
 
 .map-marker-info--active {
   display: block;
+}
+
+.map-marker-dot {
+  display: block;
+  color: var(--grey-1);
+}
+
+.map-pin-icon {
+  fill: currentColor;
+  width: 50px;
+  height: 50px;
+}
+
+.map-pin-icon--selected {
+  color: blue;
 }

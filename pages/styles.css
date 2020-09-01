@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+
 :root {
   /* solid colors */
   --dark-1: #221e1f;
@@ -23,7 +25,7 @@
 
   /* sizing */
   --title-bar-height-desktop: 60px;
-  --nav-tabs-height-desktop: 40px;
+  --nav-tabs-height-desktop: 50px;
 }
 
 html {
@@ -34,6 +36,7 @@ body {
   margin: 0;
   background-color: var(--dark-1);
   color: white;
+  font-family: 'Prompt', sans-serif;
 }
 
 a {
