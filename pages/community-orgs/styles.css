@@ -1,0 +1,35 @@
+.sidebar-content {
+    height: 100%;
+    padding: 0 1.5rem;
+  }
+  
+  .covid-testing-sites__list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+  
+  .covid-testing-sites__list-item {
+    position: relative;
+    padding: 1.5rem;
+    background-color: var(--grey-1);
+    border-radius: 3px;
+  }
+  
+  .covid-testing-sites__list-item + .covid-testing-sites__list-item {
+    margin-top: 1rem;
+  }
+  
+  /* .covid-testing-sites__list-item + .covid-testing-sites__list-item::before {
+    display: block;
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: var(--grey-2);
+  } */
+  

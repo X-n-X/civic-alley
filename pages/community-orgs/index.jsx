@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import useSwr from 'swr';
 
-import { MapMarkersContext } from 'components/MapMarkersContext';
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
+import { MapContext, MAP_ACTIONS } from 'components/MapContext';
+
 import { getLayout } from 'components/MapLayout';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
@@ -11,14 +15,18 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 const CommunityOrg = ({ data }) => (  
   <div>
     {
-      data.filter(item=>item.site_name==="StreetRidersNYC")//filtering the data here. but we want it to filter to just the item that's clicked.
-        .map((value, idx) => <p key={idx}>
-
-        {value.sunday ? `Name: ${value.site_name}` : ''}{value.site_name ? <br></br> : ''}        
-        Address: {value.address} <br></br> 
-        {value.type ? `Type: ${value.type}` : ''}{value.type ? <br></br> : ''}
-        {value.purpose_neighborhood_associated_with ? `Purpose	Neighborhood Associated With: ${value.purpose_neighborhood_associated_with}` : ''}{value.purpose_neighborhood_associated_with ? <br></br> : ''}
-        {value.website_contact_info? `Website Contact Info: ${value.website_contact_info}` : ''}{value.website_contact_info ? <br></br> : ''}</p>        
+      data.map((value) => 
+        <p key={`${value.site_name}+${value.coordinates.lat}+${value.coordinates.lng}`}>        
+        {value.Name ? `Name: ${value.Name}` : ''}{value.Name ? <br></br> : ''}        
+        Address: {value.Address} <br></br> 
+        {value.Type ? `Type: ${value.Type}` : ''}{value.Type ? <br></br> : ''}
+        {value.Purpose ? `Purpose: ${value.Purpose}` : ''}{value.Purpose ? <br></br> : ''}
+        {/* {value["Purpose	Neighborhood Associated With"] ? `Neighborhood Associated With: ${value["Purpose	Neighborhood Associated With"]}` : ''}{value.["Purpose	Neighborhood Associated With"] ? <br></br> : ''}
+        {value["Website Contact Info"]? `Website Contact Info: ${value["Website Contact Info"]}` : ''}{value["Website Contact Info"] ? <br></br> : ''} */}
+        <br></br><Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${value.coordinates.lat},${value.coordinates.lng}`}>        
+                <a>Link to this Info</a>
+            </Link>
+        </p>        
         )
       
     }
@@ -26,7 +34,7 @@ const CommunityOrg = ({ data }) => (
 );
 
 function CommunityOrgsPage() {
-  const { setState: setMapMarkers } = React.useContext(MapMarkersContext);    
+  const { dispatch: dispatchMapState } = React.useContext(MapContext);
   const { data, error } = useSwr('/api/community-orgs', fetcher);
   if (error) {
     console.error('Error loading data from API for /api/community-orgs: ', error);
@@ -49,13 +57,12 @@ function CommunityOrgsPage() {
         lng: site.coordinates.lng,
       },
     }));
-    //console.log("formattedData",formattedData);
-    setMapMarkers(formattedData);
+    dispatchMapState({ type: MAP_ACTIONS.SET_MARKERS, payload: formattedData });
 
     return () => {
-      setMapMarkers([]);
+      dispatchMapState({ type: MAP_ACTIONS.CLEAR_MARKERS });
     }
-  }, [data, setMapMarkers]);
+  }, [data, dispatchMapState]);
 
   return (
     <div className="sidebar-content">
