@@ -27,13 +27,13 @@ export function NavTabs() {
           Local Community Organizations
         </a>
       </Link>
-      <Link href="/representatives">
+      {/* <Link href="/representatives">
         <a
           className={`nav-tabs__link${pathname === '/representatives' ? ' nav-tabs__link--active' : ''}`}
         >
           Find Your Local Representatives
         </a>
-      </Link>
+      </Link> */}
     </nav>
   );
 }

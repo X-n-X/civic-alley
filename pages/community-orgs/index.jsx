@@ -18,12 +18,14 @@ const CommunityOrg = ({ data }) => (
       data.map((value) => 
         <p key={`${value.site_name}+${value.coordinates.lat}+${value.coordinates.lng}`}>        
         {value.Name ? `Name: ${value.Name}` : ''}{value.Name ? <br></br> : ''}        
-        Address: {value.Address} <br></br> 
+        Address: {value.Location} <br></br> 
         {value.Type ? `Type: ${value.Type}` : ''}{value.Type ? <br></br> : ''}
         {value.Purpose ? `Purpose: ${value.Purpose}` : ''}{value.Purpose ? <br></br> : ''}
-        {/* {value["Purpose	Neighborhood Associated With"] ? `Neighborhood Associated With: ${value["Purpose	Neighborhood Associated With"]}` : ''}{value.["Purpose	Neighborhood Associated With"] ? <br></br> : ''}
-        {value["Website Contact Info"]? `Website Contact Info: ${value["Website Contact Info"]}` : ''}{value["Website Contact Info"] ? <br></br> : ''} */}
-        <br></br><Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${value.coordinates.lat},${value.coordinates.lng}`}>        
+        {value["Neighborhood Associated With"] ? `Neighborhood(s) Associated With: ${value["Neighborhood Associated With"]}` : ''}{value["Neighborhood Associated With"] ? <br></br> : ''}        
+        {value["Website"]? `URL: `: ''}{value["Website"] ? <a href = {value["Website"]}>{value["Website"]}</a> : ''}{value["Website"] ? <br></br> : ''}        
+        {value["Contact Info"]? `Contact Info: `: ''}{value["Contact Info"]&&value["Contact Info"].includes("@") ? <a href = {`mailto:${value["Contact Info"]}`}>{value["Contact Info"]}</a> : ''}
+        {value["Contact Info"]&&!value["Contact Info"].includes("@") ? <a href = {value["Contact Info"]}>{value["Contact Info"]}</a> : ''}{value["Contact Info"] ? <br></br> : ''}        
+        <Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${value.coordinates.lat},${value.coordinates.lng}`}>        
                 <a>Link to this Info</a>
             </Link>
         </p>        
