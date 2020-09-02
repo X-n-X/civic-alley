@@ -45,16 +45,19 @@ const CommunityOrgPage = () => {
 
   useEffect(() => {
     const formattedData = (data || []).map((site) => ({
+        page: "community-orgs",
+        page_link: "",
         key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
         output_key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
-        name: site.name,   
+        name: site.Name,   
         site_info: {
-          site_name: site.site_name,
+          site_name: site.Name,
           type: site.Type,
           purpose: site.Purpose,
           neighborhood_associated_with: site["Neighborhood Associated With"],
           address: site.Location,
-          website_contact_info: site["Website Contact Info"]
+          website: site.Website,
+          contact_info: site["Contact Info"]
         },                   
         coordinates: {
           lat: site.coordinates.lat,
@@ -83,17 +86,26 @@ const CommunityOrgPage = () => {
       {formattedFilteredData.map((communityOrg) => {
         const { site_info } = communityOrg
         return (
-          <p key={`${communityOrg.name}+${communityOrg.coordinates.lat}+${communityOrg.coordinates.lng}`}>
-            {site_info.sunday ? `Name: ${site_info.site_name}` : ''}{site_info.site_name ? <br></br> : ''}        
+          <p key={`${communityOrg.Name}+${communityOrg.coordinates.lat}+${communityOrg.coordinates.lng}`}>            
+            {site_info.site_name ? `Name: ${site_info.site_name}` : ''}{site_info.site_name ? <br></br> : ''}        
             Address: {site_info.address} <br></br> 
             {site_info.type ? `Type: ${site_info.type}` : ''}{site_info.type ? <br></br> : ''}
             {site_info.purpose ? `Purpose: ${site_info.purpose}` : ''}{site_info.purpose ? <br></br> : ''}
             {site_info.neighborhood_associated_with ? `Neighborhood Associated With: ${site_info.neighborhood_associated_with}` : ''}{site_info.neighborhood_associated_with ? <br></br> : ''}
-            {site_info.website_contact_info? `Website Contact Info: ${site_info.website_contact_info}` : ''}{site_info.website_contact_info ? <br></br> : ''}
-            <br></br><Link href="/community-orgs/[site]" as={`/community-orgs`}>
+            {site_info.website? `URL: `: ''}{site_info.website ? <a href = {site_info.website}>{site_info.website}</a> : ''}{site_info.website ? <br></br> : ''}        
+            {site_info.contact_info? `Contact Info: `: ''}{site_info.contact_info&&site_info.contact_info.includes("@") ? <a href = {`mailto:${site_info.contact_info}`}>{site_info.contact_info}</a> : ''}
+              {site_info.contact_info&&!site_info.contact_info.includes("@") ? <a href = {site_info.contact_info}>{site_info.contact_info}</a> : ''}{site_info.contact_info ? <br></br> : ''}        
+            <br></br><Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${communityOrg.coordinates.lat},${communityOrg.coordinates.lng}`}>
                 <a>Link to this Info</a>
-            </Link>        
+            </Link>  
           </p>
+          // site_name
+          // type
+          // purpose
+          // neighborhood_associated_with
+          // address
+          // website
+          // contact_info
         )
       })}
     </div>

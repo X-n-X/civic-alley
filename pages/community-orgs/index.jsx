@@ -16,7 +16,7 @@ const CommunityOrg = ({ data }) => (
   <div>
     {
       data.map((value) => 
-        <p key={`${value.site_name}+${value.coordinates.lat}+${value.coordinates.lng}`}>        
+        <p key={`${value.Name}+${value.coordinates.lat}+${value.coordinates.lng}`}>        
         {value.Name ? `Name: ${value.Name}` : ''}{value.Name ? <br></br> : ''}        
         Address: {value.Location} <br></br> 
         {value.Type ? `Type: ${value.Type}` : ''}{value.Type ? <br></br> : ''}
@@ -25,7 +25,7 @@ const CommunityOrg = ({ data }) => (
         {value["Website"]? `URL: `: ''}{value["Website"] ? <a href = {value["Website"]}>{value["Website"]}</a> : ''}{value["Website"] ? <br></br> : ''}        
         {value["Contact Info"]? `Contact Info: `: ''}{value["Contact Info"]&&value["Contact Info"].includes("@") ? <a href = {`mailto:${value["Contact Info"]}`}>{value["Contact Info"]}</a> : ''}
         {value["Contact Info"]&&!value["Contact Info"].includes("@") ? <a href = {value["Contact Info"]}>{value["Contact Info"]}</a> : ''}{value["Contact Info"] ? <br></br> : ''}        
-        <Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${value.coordinates.lat},${value.coordinates.lng}`}>        
+        <Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${value.coordinates.lat},${value.coordinates.lng}`}>
                 <a>Link to this Info</a>
             </Link>
         </p>        
@@ -44,15 +44,19 @@ function CommunityOrgsPage() {
 
   useEffect(() => {
     const formattedData = (data || []).map((site) => ({
+      page: "community-orgs",
+      page_link: "[communityOrg]",
       key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
       output_key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
-      name: site.name,   
+      name: site.Name,   
       site_info: {
-        site_name: site.site_name,
+        site_name: site.Name,
         type: site.Type,
-        purpose_neighborhood_associated_with: site["Purpose	Neighborhood Associated With"],
+        purpose: site.Purpose,
+        neighborhood_associated_with: site["Neighborhood Associated With"],
         address: site.Location,
-        website_contact_info: site["Website Contact Info"]
+        website: site.Website,
+        contact_info: site["Contact Info"]
       },                   
       coordinates: {
         lat: site.coordinates.lat,

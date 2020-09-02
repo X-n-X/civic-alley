@@ -3,7 +3,7 @@ export function Header() {
 
   return (
     <header className="main-header">
-      Townie
+      Civic Alley
     </header>
   );
 }

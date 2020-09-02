@@ -45,6 +45,8 @@ const TestingSitePage = () => {
 
   useEffect(() => {
     const formattedData = (data || []).map((site) => ({
+      page: "covid-testing-sites",
+      page_link: "",
       key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
       output_key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
       name: site.site_name,
@@ -107,7 +109,7 @@ const TestingSitePage = () => {
             {site_info.saturday ? `Saturday: ${site_info.saturday}` : ''}{site_info.saturday ? <br></br> : ''}
             {site_info.additional_info ? `Additional Information: ${site_info.additional_info}` : ''}{site_info.additional_info ? <br></br> : ''}
             {site_info.provider_url ? `URL: ` : ''}{site_info.provider_url ? <a href = {site_info.provider_url}>{site_info.provider_url}</a> : ''}{testingSite.provider_url ? <br></br> : ''}
-            <br></br><Link href="/covid-testing-sites/[site]" as={`/covid-testing-sites`}>
+            <br></br><Link href="/covid-testing-sites/[testingSite]" as={`/covid-testing-sites/${testingSite.coordinates.lat},${testingSite.coordinates.lng}`}>
                 <a>Link to this Info</a>
             </Link>
           </p>

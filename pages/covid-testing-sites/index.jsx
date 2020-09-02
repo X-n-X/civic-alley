@@ -51,6 +51,8 @@ function CovidTestingSitesPage() {
 
   useEffect(() => {
     const formattedData = (data || []).map((site) => ({
+      page: "covid-testing-sites",
+      page_link: "[testingSite]",
       key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
       output_key: `${site.site_name}+${site.coordinates.lat}+${site.coordinates.lng}`,
       name: site.site_name,
