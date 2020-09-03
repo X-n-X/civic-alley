@@ -1,17 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { startCase } from 'lodash';
 
 import { MapPinIcon } from 'components/MapPinIcon';
 
-export const MapMarker = ({ name, coordinates, page, page_link, selected }) => {
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [currentInfoOpen, setInfoOpen] = useState("");
-  // const toggleInfo = useCallback((e) => {
-  //   setIsInfoOpen((wasOpen) => !wasOpen);
-  //   setInfoOpen(output_key);
-  // }, [setIsInfoOpen]);
-
+export const MapMarker = ({ pageLink, selected }) => {
   return selected
     ? (
       <div className="map-marker-container">
@@ -30,10 +22,8 @@ export const MapMarker = ({ name, coordinates, page, page_link, selected }) => {
     )
     : (
       <Link
-        // href="/covid-testing-sites/[testingSite]"
-        // as={`/covid-testing-sites/${coordinates.lat},${coordinates.lng}`}
-        href={page+`/`+page_link}
-        as={`/${page}/${coordinates.lat},${coordinates.lng}`}
+        href={pageLink.href}
+        as={pageLink.as}
       >
         <a className="map-marker-dot">
           <MapPinIcon className="map-pin-icon" />

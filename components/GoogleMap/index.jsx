@@ -14,7 +14,6 @@ function getMapOptions() {
 
 export function GoogleMap() {
   const { mapState } = useContext(MapContext);
-  console.log('mapstate?', mapState);
 
   return (
     <div className="google-map-container">
@@ -37,8 +36,7 @@ export function GoogleMap() {
             output_key={item.output_key}
             name={item.name}
             siteInfo={item.site_info}
-            page={item.page}
-            page_link={item.page_link}
+            pageLink={item.pageLink}
             selected={
               mapState.activeMarker
               && (

@@ -78,8 +78,6 @@ function mapStateReducer(state, action) {
       };
     }
     case MAP_ACTIONS.SET_ZOOM: {
-      console.log('setting zoom: ', action.payload)
-
       return {
         ...state,
         zoom: action.payload,
@@ -99,8 +97,6 @@ export function MapStateContextProvider({ children }) {
   }
 
   const mapContextState = React.useMemo(() => {
-    console.log('mapstate changed? ', mapState);
-    //console.log("first market",markers[0])
     return {
       mapState,
       dispatch,
