@@ -4,7 +4,7 @@ export function MapPinIcon(props) {
   return (
     <svg
       version="1.1"
-      viewBox="0 0 91 91"
+      viewBox="17 20 55 55"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
