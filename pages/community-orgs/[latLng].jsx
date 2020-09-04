@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react';
-import useSwr from 'swr';
 import { useRouter } from 'next/router'
 
 import { getLayout } from 'components/MapLayout';
@@ -8,27 +7,28 @@ import { CommunityOrgInfo } from 'components/CommunityOrgInfo';
 
 import { useCommunityOrgsSiteMarkers } from 'hooks/useCommunityOrgsSiteMarkers';
 
-const fetcher = (...args) => fetch(...args).then(res => res.json());
-
-const latLongRegex = /^([-\d.]+),([-\d.]+)$/
-const getLatLongFromPath = (path) => {
-  const match = latLongRegex.exec(path) || []
-  return {
-    lat: parseFloat(match[1]),
-    lng: parseFloat(match[2]),
-  }
-}
+import { getLatLngFromPath } from 'lib/getLatLngFromPath.js';
 
 const CommunityOrgPage = () => {
   const router = useRouter()
   const { latLng } = router.query
+  const coordinates = useMemo(() => getLatLngFromPath(latLng), [latLng]);
 
-  const coordinates = useMemo(() => getLatLongFromPath(latLng), [latLng]);
+  const { dispatch: dispatchMapState } = React.useContext(MapContext);
 
-  const { mapState: { markers }, dispatch: dispatchMapState } = React.useContext(MapContext);
+  const [data, error] = useCommunityOrgsSiteMarkers();
+
+  if (error) {
+    console.error('Error loading data from API for /api/community-orgs: ', error);
+  }
 
   useEffect(() => {
-    console.log('setting center: ', coordinates)
+    if (data && !error) {
+      dispatchMapState({ type: MAP_ACTIONS.SET_MARKERS, payload: data });
+    }
+  }, [data, error]);
+
+  useEffect(() => {
     dispatchMapState({
       type: MAP_ACTIONS.SET_ACTIVE_MARKER,
       payload: coordinates,
@@ -39,29 +39,23 @@ const CommunityOrgPage = () => {
     }
   }, [coordinates]);
 
-  const { data, error } = useSwr('/api/community-orgs', fetcher);
-
-  if (error) {
-    console.error('Error loading data from API for /api/community-orgs: ', error);
-  }
-
-  useCommunityOrgsSiteMarkers({ data, dispatchMapState });
-
   const filteredItems = useMemo(
     () => {
-      return Array.isArray(markers)
-        ? markers.filter(
-          (marker) => marker.coordinates.lat === coordinates.lat
-            && marker.coordinates.lng === coordinates.lng
+      return Array.isArray(data)
+        ? data.filter(
+          (site) => site.coordinates.lat === coordinates.lat
+            && site.coordinates.lng === coordinates.lng
         )
         : []
     },
-    [markers, coordinates],
+    [data, coordinates],
   );
 
   return (
     <div>
-      {filteredItems.map((communityOrg) => (
+      {error && 'Error loading content'}
+      {!data && !error && 'Loading...'}
+      {!error && filteredItems && filteredItems.map((communityOrg) => (
         <CommunityOrgInfo orgSite={communityOrg} key={communityOrg.key} />
       ))}
     </div>

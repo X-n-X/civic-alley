@@ -33,10 +33,13 @@ function mapStateReducer(state, action) {
       };
     }
     case MAP_ACTIONS.CLEAR_MARKERS: {
-      return {
+      console.log('clearing markers');
+      const newState = {
         ...state,
         markers: [],
       };
+      console.log('newState after clearing? ', newState);
+      return newState;
     }
     case MAP_ACTIONS.SET_CENTER: {
       return {
@@ -97,6 +100,8 @@ export function MapStateContextProvider({ children }) {
   }
 
   const mapContextState = React.useMemo(() => {
+    console.log('mapContextState updating, new state: ', mapState);
+
     return {
       mapState,
       dispatch,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import useSwr from 'swr';
 
-import { MapMarkersContext } from 'components/MapMarkersContext';
 import { getLayout } from 'components/MapLayout';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
@@ -23,17 +22,17 @@ const RepresentativesByName = ({ json_input }) => (
 //   }
 
 //   useEffect(() => {
-    
+
 //   });
 // }
 
 class SimpleMap extends Component {
   constructor(props){
-      super(props); 
+      super(props);
       this.state = {
         address: "",
         reports: {offices:[""],officials:[""]},
-      };        
+      };
 
       this.setAddress = this.setAddress.bind(this);
       this.findRepresentatives = this.findRepresentatives.bind(this);
@@ -49,7 +48,7 @@ class SimpleMap extends Component {
 
   findRepresentatives(e){
     e.preventDefault();
-    if(this.state.address !== ""){ 
+    if(this.state.address !== ""){
         fetch(`https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_BOOTSTRAP_URL}&address=${this.state.address}`,{
             method: "GET",
             dataType: "JSON",
@@ -58,7 +57,7 @@ class SimpleMap extends Component {
             }
         })
         .then(response => response.json())
-        .then(data => { 
+        .then(data => {
           console.log(data);
           this.setState({ reports: data})
         });
@@ -72,7 +71,7 @@ render() {
   // }
 
   return (
-    
+
     <div>
       <h1>Enter your Address: {this.state.answer}</h1>
       <input value={this.state.address} onChange={this.setAddress}></input>

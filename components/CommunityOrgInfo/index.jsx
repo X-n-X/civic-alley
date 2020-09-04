@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 
 export function CommunityOrgInfo ({ orgSite }) {
-  console.log('orgSite: ', orgSite);
   const { siteInfo } = orgSite;
   return (
     <p>
@@ -14,7 +13,7 @@ export function CommunityOrgInfo ({ orgSite }) {
       {siteInfo.website ? `URL: `: ''}{siteInfo.website ? <a href={siteInfo.website}>{siteInfo.website}</a> : ''}{siteInfo.website ? <br /> : ''}
       {siteInfo.contactInfo ? `Contact Info: `: ''}{siteInfo.contactInfo&&siteInfo.contactInfo.includes("@") ? <a href = {`mailto:${siteInfo.contactInfo}`}>{siteInfo.contactInfo}</a> : ''}
       {siteInfo.contactInfo && !siteInfo.contactInfo.includes("@") ? <a href={siteInfo.contactInfo}>{siteInfo.contactInfo}</a> : ''}{siteInfo.contactInfo ? <br /> : ''}
-      <Link href="/community-orgs/[communityOrg]" as={`/community-orgs/${orgSite.coordinates.lat},${orgSite.coordinates.lng}`}>
+      <Link href="/community-orgs/[latLng]" as={`/community-orgs/${orgSite.coordinates.lat},${orgSite.coordinates.lng}`}>
         <a>Link to this Info</a>
       </Link>
     </p>
