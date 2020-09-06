@@ -7,10 +7,11 @@
     "node": "12.x",
     "npm": "6.x"
   },
-  "scripts": {
-    "start": "next",
+  "scripts": {    
     "start:prod": "next start",
     "build": "next build",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build",
     "server": "nodemon app.js",
     "webpack": "webpack --watch --mode=development"
   },
