@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "next",
-    "start:prod": "npm run start:prod",
-    "build": "npm run build",
+    "start:prod": "next start",
+    "build": "next build",
     "server": "nodemon app.js",
     "webpack": "webpack --watch --mode=development"
   },
