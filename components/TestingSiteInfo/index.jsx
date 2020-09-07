@@ -20,6 +20,7 @@ export function TestingSiteInfo({ site }) {
   } = ((site || {}).site_info || {});
   return (
     <p>
+      {site.name ? `Name: ${site.name}` : ''}{site.name ? <br /> : ''}
       Address: {address} <br />
       {phone && (
         <>
