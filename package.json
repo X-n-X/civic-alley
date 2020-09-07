@@ -1,5 +1,5 @@
 {
-  "name": "townie",
+  "name": "civic-alley",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,7 +10,7 @@
   "scripts": {
     "start": "next",
     "start:prod": "next start",
-    "build": "next build",
+    "build": "npm install && next build",
     "server": "nodemon app.js",
     "webpack": "webpack --watch --mode=development"
   },
