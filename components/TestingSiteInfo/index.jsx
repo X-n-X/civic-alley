@@ -10,6 +10,7 @@ const HourDisplay = ({ day, dayHours }) => (
 
 export function TestingSiteInfo({ site }) {
   const {
+    name,
     address,
     phone,
     appointment_required,
@@ -20,7 +21,7 @@ export function TestingSiteInfo({ site }) {
   } = ((site || {}).site_info || {});
   return (
     <p>
-      {site.name ? `Name: ${site.name}` : ''}{site.name ? <br /> : ''}
+      {name ? `Name: ${name}` : ''}{name ? <br /> : ''}
       Address: {address} <br />
       {phone && (
         <>
