@@ -8,9 +8,9 @@
     "npm": "6.x"
   },
   "scripts": {
-    "start": "next -p $PORT",
+    "start": "next",
     "start:prod": "next start",
-    "build": "npm install && next build",
+    "build": "next build",
     "server": "nodemon app.js",
     "webpack": "webpack --watch --mode=development"
   },

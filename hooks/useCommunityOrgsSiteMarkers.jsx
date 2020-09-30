@@ -18,8 +18,9 @@ export function useCommunityOrgsSiteMarkers() {
           key: `${site.Name}+${site.coordinates.lat}+${site.coordinates.lng}`,
           outputKey: `${site.Name}+${site.coordinates.lat}+${site.coordinates.lng}`,
           name: site.Name,
-          siteInfo: {
-            siteName: site.Name,
+          address: site.Location,
+          site_info: {
+            name: site.Name,
             type: site.Type,
             purpose: site.Purpose,
             neighborhoodAssociatedWith: site["Neighborhood Associated With"],

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { CommunityOrgInfo } from 'components/CommunityOrgInfo';
+import { InfoLink } from 'components/InfoLink';
 import { MapContext, MAP_ACTIONS } from 'components/MapContext';
 import { getLayout } from 'components/MapLayout';
 
@@ -25,8 +26,9 @@ function CommunityOrgsPage() {
     <div className="sidebar-content">
       {error && 'Error loading content'}
       {!data && !error && 'Loading...'}
-      {!error && data && data.map((orgSite) => (
-        <CommunityOrgInfo orgSite={orgSite} key={orgSite.key} />
+      {!error && data && data.map((site) => (
+        // <CommunityOrgInfo orgSite={orgSite} key={orgSite.key} />
+        <InfoLink site={site} key={site.key} />
       ))}
     </div>
   );

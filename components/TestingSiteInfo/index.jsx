@@ -20,12 +20,12 @@ export function TestingSiteInfo({ site }) {
     provider_url,
   } = ((site || {}).site_info || {});
   return (
-    <p>
+    <p >
       {name ? `Name: ${name}` : ''}{name ? <br /> : ''}
       Address: {address} <br />
       {phone && (
-        <>
-          Phone Number: {phone}<br />
+        <>          
+          Phone Number: <a href={"tel:"+phone}>{phone}</a><br />
         </>
       )}
       You are {appointment_required ? 'required' : 'not required'} to have an appointment to get tested.<br />
