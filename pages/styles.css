@@ -61,6 +61,7 @@ a {
 }
 
 @import './covid-testing-sites/styles.css';
+@import './about/styles.css';
 @import '../components/MapLayout/styles.css';
 @import '../components/MapMarker/styles.css';
 @import '../components/GoogleMap/styles.css';

@@ -1,9 +1,7 @@
 export function Header() {
-  const [state, useState] = React.useState(true);
-
   return (
     <header className="main-header">
-      Civic Alley
+      <h1>Civic Alley</h1>
     </header>
   );
 }
