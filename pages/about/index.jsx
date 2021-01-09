@@ -33,10 +33,10 @@ function AboutPage() {
       <footer className="about-page__attribution">
         <p>
           Civic Alley is a project of the BY &amp; BY Design Collaborative.
-          For more information, click <a href = {`https://drive.google.com/file/d/1JBGdB1d8zzTdpR4-NcpJR9_nnTnSiVTb/view?usp=sharing`}>here.</a>
+          For more information, click <a href={`https://drive.google.com/file/d/1JBGdB1d8zzTdpR4-NcpJR9_nnTnSiVTb/view?usp=sharing`}>here.</a>
         </p>
         <p>
-          Email: <a href = {`mailto:xandxandxandx@gmail.com`}>xandxandxandx@gmail.com</a>
+          Email: <a href={`mailto:xandxandxandx@gmail.com`}>xandxandxandx@gmail.com</a>
         </p>
       </footer>
     </div>

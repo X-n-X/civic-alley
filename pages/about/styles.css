@@ -1,6 +1,6 @@
 .about-page__container {
   --horizontal-padding: 1.5em;
-  --max-width: 960px;
+  --max-width: var(--max-width-content);
 
   padding-top: 3em;
   padding-bottom: 8em;
@@ -29,8 +29,4 @@
 .about-page__attribution p {
   text-align: center;
   font-size: 0.75em;
-}
-
-.about-page__attribution::before {
-
 }

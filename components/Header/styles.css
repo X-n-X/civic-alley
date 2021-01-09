@@ -3,6 +3,7 @@
   align-items: center;
   padding: 0 2rem;
   height: 100%;
+  max-width: var(--max-width-content);
 }
 
 .main-header h1 {
@@ -10,4 +11,16 @@
   font-size: 2rem;
   font-weight: normal;
   margin: 0;
+}
+
+.main-header nav {
+  margin-left: auto;
+}
+
+.main-header nav a {
+  text-decoration: none;
+}
+
+.main-header nav a + a {
+  margin-left: 2rem;
 }
