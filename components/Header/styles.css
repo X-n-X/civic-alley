@@ -1,8 +1,28 @@
 .main-header {
   display: flex;
   align-items: center;
-  font-family: "Helvetica", "Arial", sans-serif;
-  font-size: 2rem;
   padding: 0 2rem;
   height: 100%;
+  max-width: var(--max-width-content);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-header h1 {
+  font-family: 'Prompt', 'Helvetica', 'Arial', sans-serif;
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.main-header nav {
+  margin-left: auto;
+}
+
+.main-header nav a {
+  text-decoration: none;
+}
+
+.main-header nav a + a {
+  margin-left: 2rem;
 }

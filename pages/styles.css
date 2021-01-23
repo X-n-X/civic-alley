@@ -26,6 +26,14 @@
   /* sizing */
   --title-bar-height-desktop: 60px;
   --nav-tabs-height-desktop: 50px;
+
+  /**
+  * a max width for keeping main content constrained
+  *
+  * you don't necessarily need to have the main layout constrained
+  * with this amount, the main map layout looks better full width
+  */
+  --max-width-content: 960px;
 }
 
 html {
@@ -61,6 +69,7 @@ a {
 }
 
 @import './covid-testing-sites/styles.css';
+@import './about/styles.css';
 @import '../components/MapLayout/styles.css';
 @import '../components/MapMarker/styles.css';
 @import '../components/GoogleMap/styles.css';
